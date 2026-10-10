@@ -1,0 +1,4 @@
+# Optional local StateGraph execution, retaining the tested saver environment.
+-r ../langgraph_sqlite/requirements.in
+-c ../langgraph_sqlite/requirements.txt
+langgraph==1.2.14

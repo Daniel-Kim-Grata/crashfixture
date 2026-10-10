@@ -1,0 +1,35 @@
+name: release-build
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install --require-hashes -r requirements-dev.txt
+      - run: python -m pip install --no-deps --no-build-isolation -e .
+      - run: python scripts/check_release.py "$RELEASE_TAG"
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+      - name: Set build timestamp
+        run: echo "SOURCE_DATE_EPOCH=$(git log -1 --format=%ct)" >> "$GITHUB_ENV"
+      - run: python scripts/verify.py
+      - run: python -m pip install --force-reinstall --no-index --no-deps dist/*.whl
+      - run: python scripts/check_onboarding.py --python "$(python -c 'import sys; print(sys.executable)')"
+      - run: sha256sum dist/* > artifacts/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-candidate
+          path: |
+            dist/*
+            artifacts/SHA256SUMS
+            artifacts/pytest.xml
+            artifacts/onboarding
+          if-no-files-found: error
