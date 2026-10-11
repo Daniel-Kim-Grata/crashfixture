@@ -13,8 +13,8 @@ except ImportError:
 def main() -> int:
     project = Path(__file__).resolve().parents[1] / "pyproject.toml"
     version = tomllib.loads(project.read_text())["project"]["version"]
-    if len(sys.argv) != 2 or not re.fullmatch(r"v\d+\.\d+\.\d+", sys.argv[1]):
-        print("expected a release tag such as v0.1.0", file=sys.stderr)
+    if len(sys.argv) != 2 or not re.fullmatch(r"v\d+\.\d+\.\d+(?:a\d+)?", sys.argv[1]):
+        print("expected a release tag such as v0.1.0a1", file=sys.stderr)
         return 1
     if sys.argv[1] != "v" + version:
         print("tag does not match pyproject.toml version", file=sys.stderr)

@@ -1,6 +1,17 @@
 # Changelog
 
-## 0.1.0 — unreleased
+## 0.1.0a1 — 2026-10-11
+
+- Clean consumer walkthrough for the real synchronous LangGraph graph, installed
+  alpha wheel, physical provider rows, fresh checkpoint resume, and negative controls.
+- Original synthetic charge/retry example with seven calibrated trials and five
+  physical-charge evidence regressions; no live payment or upstream reproduction.
+- Explicit alpha package version, alpha tag validation, and repository links.
+
+This GitHub prerelease is validated locally on macOS/Python 3.10.7. Hosted CI,
+Linux and other Python versions remain unrun. No PyPI publication is claimed.
+
+## Initial source alpha
 
 - Optional actual StateGraph execution with sync checkpoints, ten crash controls,
   three two-process resume cases, parent-owned barriers, physical lock witness,
@@ -25,4 +36,5 @@
 - Installed-wheel console/pytest onboarding check in an isolated directory,
   included in the CI definition; launch walkthrough and public name audit.
 
-Initial source alpha. No package release or external integration is claimed.
+The initial source export preceded the first package prerelease. No external
+integration or adoption is claimed.

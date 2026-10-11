@@ -12,6 +12,16 @@ live external effects. Name and API are provisional; this is an alpha.
 See the [launch walkthrough](docs/launch.md) for a short demo, clean-wheel
 onboarding commands, and the remaining release gates.
 
+**Try the [clean consumer LangGraph walkthrough](docs/langgraph-walkthrough.md):**
+install the alpha wheel, kill a real graph after its effect commits, and inspect
+the duplicate, stable-key recovery, reconciliation hold, and no-op control.
+The [synthetic charge/retry example](examples/charge_retry/README.md) shows the
+same failure window using fictional charge rows. No upstream reproduction is claimed.
+
+If this helps you catch a recovery bug, consider starring the repository so
+other developers can find it. Useful reports include the failing boundary and
+sanitized evidence; never upload credentials or customer data.
+
 ## Two-minute demo
 
 From a source checkout:

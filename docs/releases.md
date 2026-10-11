@@ -10,8 +10,10 @@ and contributor attribution.
    the chosen package/repository destination; the provisional name is not reserved.
 2. Run `python scripts/verify.py` and the two-minute demo. Review every regression
    and inconclusive control, not just the command's exit status.
-3. Obtain independent review and run hosted CI on Linux and macOS at the chosen
-   commit. Tests on one local macOS host do not establish the hosted matrix.
+3. Obtain independent review. For a locally validated GitHub alpha, keep Actions
+   disabled and explicitly disclose the tested platform/interpreter and unrun
+   hosted matrix. A broader release needs hosted CI on Linux and macOS at the
+   chosen commit; tests on one local Mac do not establish that matrix.
 4. After a version tag is separately authorized, create the reviewed tag. The
    `release-build` workflow checks tag/version agreement, runs the same checks,
    uses the commit timestamp as `SOURCE_DATE_EPOCH`, and uploads wheel/sdist plus

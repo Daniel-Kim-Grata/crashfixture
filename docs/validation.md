@@ -60,7 +60,14 @@ saver/adoption/triage/graph checks, installed-wheel onboarding, normalized repea
 builds, and a source/package audit; retain the exact commit and check receipts.
 No historical baseline alone certifies the current source.
 
+The `0.1.0a1` GitHub prerelease includes a fresh `VALIDATION.json` receipt bound to
+its source commit and exact wheel/sdist hashes. Use that receipt for release
+counts and evidence, rather than treating the historical baseline above as a
+current-source certification. The clean consumer walkthrough executes the graph
+from a separate directory with the wheel installed. The charge/retry fixture is
+an original synthetic SQLite model and makes no upstream reproduction claim.
+
 Unrun: hosted GitHub CI/release workflows, the Linux/other-Python matrix, real
 OpenHands or MCP integration, LangGraph async/pending-write or upstream-bug reproduction,
-and public package installation. The source alpha has no package release.
+and PyPI publication. The GitHub alpha assets are separate from PyPI.
 No external adoption is claimed.
