@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Post-release portability evidence for the existing `0.1.0a1` source and wheel:
+  Linux/aarch64/Python 3.11.15 core checks and onboarding; macOS/Python 3.14.7 core
+  checks and onboarding; macOS/Python 3.13.14 onboarding. Both new core builds
+  match the published wheel and sdist hashes with the fixed release epoch.
+- Python 3.14 added to the prepared CI matrix. Actions remain disabled and no
+  hosted matrix or new package release is claimed.
+
 ## 0.1.0a1 — 2026-10-11
 
 - Clean consumer walkthrough for the real synchronous LangGraph graph, installed

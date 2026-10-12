@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "checked_date_utc": "2026-10-12",
+  "repository": "https://github.com/Daniel-Kim-Grata/crashfixture",
+  "source_commit": "90a93643ecb8ce2ef2421808a4a5fabcb310e41c",
+  "source_tree": "afd1ce48170c2ba1f20dcad63a86f0f4bc68d4c9",
+  "release_tag": "v0.1.0a1",
+  "artifacts": {
+    "crashfixture-0.1.0a1-py3-none-any.whl": "44ff7885625b43162344d162120c5ff468364372d1af8a44a3feb41aa414eb4a",
+    "crashfixture-0.1.0a1.tar.gz": "6ae7da007839620426158168503baf152674800f9a72f0e4aa7faf39fb91f8a6"
+  },
+  "build_epoch": 1791752011,
+  "development_dependencies": "requirements-dev.txt at source_commit, installed with --require-hashes",
+  "canonical_command": "python scripts/verify.py",
+  "onboarding_command": "python scripts/check_onboarding.py --python <installed-wheel-consumer-python> --outdir <fresh-evidence-directory>",
+  "runs": [
+    {
+      "platform": "Linux/aarch64",
+      "python": "3.11.15",
+      "container_image": "python@sha256:db3ff2e1800a8581e2c48a27c3995339d47bdf046da21c7627accd3d51053a93",
+      "core_tests_passed": 84,
+      "core_failures": 0,
+      "core_errors": 0,
+      "core_skips": 0,
+      "ruff": "passed",
+      "build": "passed",
+      "rebuilt_wheel_matches_release": true,
+      "rebuilt_sdist_matches_release": true,
+      "installed_fixture_tests_passed": 3,
+      "calibration": {"pass": 4, "expected_fail": 4, "inconclusive": 6}
+    },
+    {
+      "platform": "macOS/arm64",
+      "python": "3.14.7",
+      "core_tests_passed": 84,
+      "core_failures": 0,
+      "core_errors": 0,
+      "core_skips": 0,
+      "ruff": "passed",
+      "build": "passed",
+      "rebuilt_wheel_matches_release": true,
+      "rebuilt_sdist_matches_release": true,
+      "installed_fixture_tests_passed": 3,
+      "calibration": {"pass": 4, "expected_fail": 4, "inconclusive": 6}
+    },
+    {
+      "platform": "macOS/arm64",
+      "python": "3.13.14",
+      "canonical_source_checks": "not_run",
+      "installed_fixture_tests_passed": 3,
+      "calibration": {"pass": 4, "expected_fail": 4, "inconclusive": 6}
+    }
+  ],
+  "limits": {
+    "hosted_ci": "not_run",
+    "github_actions_enabled": false,
+    "linux_x86_64": "not_run",
+    "optional_langgraph_examples_on_new_platforms": "not_run",
+    "new_version": false,
+    "pypi_publication": false,
+    "external_adoption": "not_established"
+  }
+}

@@ -64,10 +64,11 @@ demo verdict must match exactly once. Use the checker's exit code for the
 onboarding gate. Demo JUnit deliberately retains four failures and six errors;
 it is evidence for negative controls, not a green CI test suite.
 
-CI now installs the built wheel after source verification and runs this same
-check. The workflow is prepared; hosted Linux/macOS and Python 3.13 remain unrun
-in this alpha. Actions are initially disabled. Local evidence covers macOS
-Python 3.10.7.
+CI installs the built wheel after source verification and runs this same check.
+The prepared Linux/macOS matrix covers Python 3.10, 3.13, and 3.14; Actions remain
+disabled and hosted execution is unrun. The release's original evidence covers
+macOS/Python 3.10.7. Later [portability checks](portability.md) cover the exact
+released wheel on macOS/Python 3.13.14 and 3.14.7, plus Linux/aarch64/Python 3.11.15.
 
 ## Name, license, and provenance
 

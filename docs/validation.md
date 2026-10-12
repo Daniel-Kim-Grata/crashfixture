@@ -67,7 +67,12 @@ current-source certification. The clean consumer walkthrough executes the graph
 from a separate directory with the wheel installed. The charge/retry fixture is
 an original synthetic SQLite model and makes no upstream reproduction claim.
 
-Unrun: hosted GitHub CI/release workflows, the Linux/other-Python matrix, real
+Post-release [portability checks](portability.md), bound to the same `90a9364`
+source and published artifact hashes, add Linux/aarch64/Python 3.11.15 and newer
+macOS Python evidence. They cover the core and installed-wheel paths; the optional
+LangGraph examples were not repeated on those platforms.
+
+Unrun: hosted GitHub CI/release workflows, the full prepared runner matrix, real
 OpenHands or MCP integration, LangGraph async/pending-write or upstream-bug reproduction,
 and PyPI publication. The GitHub alpha assets are separate from PyPI.
 No external adoption is claimed.

@@ -11,6 +11,8 @@ Python 3.10+, Linux or macOS. No runtime dependencies, containers, model calls, 
 live external effects. Name and API are provisional; this is an alpha.
 See the [launch walkthrough](docs/launch.md) for a short demo, clean-wheel
 onboarding commands, and the remaining release gates.
+The [portability receipt](docs/portability.md) records source and released-wheel
+checks on Linux/aarch64 and newer macOS Python versions; hosted CI remains unrun.
 
 **Try the [clean consumer LangGraph walkthrough](docs/langgraph-walkthrough.md):**
 install the alpha wheel, kill a real graph after its effect commits, and inspect
