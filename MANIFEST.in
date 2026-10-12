@@ -5,5 +5,6 @@ recursive-include examples *.py
 recursive-include examples/langgraph_sqlite *.md *.in *.txt
 recursive-include examples/support_triage *.md *.in *.txt
 recursive-include examples/charge_retry *.md
+recursive-include examples/retry_job *.md *.in *.txt
 recursive-include tests *.py
 recursive-include scripts *.py

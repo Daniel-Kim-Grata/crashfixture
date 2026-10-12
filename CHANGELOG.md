@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Clean-wheel quickstart without a checkout and a queued report-job crash/retry
+  example with stable-job-key recovery, expected duplicate failure, and a no-fault
+  control. Existing release assets and runtime remain unchanged.
 - Post-release portability evidence for the existing `0.1.0a1` source and wheel:
   Linux/aarch64/Python 3.11.15 core checks and onboarding; macOS/Python 3.14.7 core
   checks and onboarding; macOS/Python 3.13.14 onboarding. Both new core builds

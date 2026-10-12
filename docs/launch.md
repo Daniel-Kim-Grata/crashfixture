@@ -1,8 +1,9 @@
 # Launch walkthrough and readiness
 
-The project is a source alpha. No public package, external users, or upstream
-compatibility is claimed. The runnable artifact is the original synthetic
-subprocess fixture, with no model calls or live effects.
+The project has an existing GitHub alpha wheel and source distribution, separate
+from PyPI. Start with the [clean-wheel quickstart](quickstart.md). No external
+users or upstream compatibility are established. The runnable artifact is the
+original synthetic subprocess fixture, with no model calls or live effects.
 
 ## A short demo
 
@@ -89,8 +90,8 @@ The earlier unpublished draft name `restartcheck` had search ambiguity with
 [`salt.modules.restartcheck` module](https://docs.saltproject.io/en/latest/ref/modules/all/salt.modules.restartcheck.html).
 `restartwitness` is already a different public
 [scientific restart-contract project](https://github.com/loaff123/restartwitness).
-No old-name package/CLI alias is retained: this draft has no public release or
-users requiring migration. The package, console command, pytest entry point,
+No old-name package/CLI alias is retained: those draft names were never released.
+The package, console command, pytest entry point,
 worker protocol, and output namespace all use `crashfixture`.
 
 The MIT text, `pyproject.toml` license identifier, and wheel license file agree.
@@ -107,8 +108,9 @@ supporting evidence, not a comprehensive provenance or legal clearance guarantee
 
 1. Review the source pin, package file lists, license, and bounded source scan.
    Keep the README's alpha, synthetic-only, and illustrative-integration limits.
-2. Require the hosted CI matrix and installed-wheel onboarding check before an
-   alpha tag. Actions are initially disabled; hosted checks have not run.
+2. A broader platform release needs hosted CI and installed-wheel onboarding.
+   The existing local alpha disclosed its tested platforms. Actions remain
+   disabled and hosted checks have not run; activation needs separate approval.
 3. Follow [release instructions](releases.md), which build review artifacts and
    do not auto-publish a package. Tags and package publication need a separately
    approved destination and reviewed artifact hashes.
