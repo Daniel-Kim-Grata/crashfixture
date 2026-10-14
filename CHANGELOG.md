@@ -9,8 +9,11 @@
   Linux/aarch64/Python 3.11.15 core checks and onboarding; macOS/Python 3.14.7 core
   checks and onboarding; macOS/Python 3.13.14 onboarding. Both new core builds
   match the published wheel and sdist hashes with the fixed release epoch.
-- Python 3.14 added to the prepared CI matrix. Actions remain disabled and no
-  hosted matrix or new package release is claimed.
+- Python 3.14 added to the CI matrix. On 2026-10-12,
+  [hosted run 38319407667](https://github.com/Daniel-Kim-Grata/crashfixture/actions/runs/38319407667)
+  passed all six Ubuntu/macOS jobs at `3454cd5` for Python 3.10, 3.13, and 3.14,
+  including core verification and built-wheel onboarding. Optional LangGraph
+  examples were not included; no new package release is claimed.
 
 ## 0.1.0a1 — 2026-10-11
 
@@ -20,8 +23,10 @@
   physical-charge evidence regressions; no live payment or upstream reproduction.
 - Explicit alpha package version, alpha tag validation, and repository links.
 
-This GitHub prerelease is validated locally on macOS/Python 3.10.7. Hosted CI,
-Linux and other Python versions remain unrun. No PyPI publication is claimed.
+At initial publication, this GitHub prerelease was validated locally on
+macOS/Python 3.10.7; hosted CI, Linux and other Python versions had not run.
+Later portability and hosted evidence is recorded above and in
+[the portability receipt](docs/portability.md). No PyPI publication is claimed.
 
 ## Initial source alpha
 

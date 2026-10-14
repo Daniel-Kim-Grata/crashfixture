@@ -66,8 +66,10 @@ onboarding gate. Demo JUnit deliberately retains four failures and six errors;
 it is evidence for negative controls, not a green CI test suite.
 
 CI installs the built wheel after source verification and runs this same check.
-The prepared Linux/macOS matrix covers Python 3.10, 3.13, and 3.14; Actions remain
-disabled and hosted execution is unrun. The release's original evidence covers
+On 2026-10-12, [hosted run 38319407667](https://github.com/Daniel-Kim-Grata/crashfixture/actions/runs/38319407667)
+passed all six Ubuntu/macOS jobs at `3454cd5` for Python 3.10, 3.13, and 3.14,
+including source verification and built-wheel onboarding. Optional LangGraph
+examples were not included. The release's original evidence covers
 macOS/Python 3.10.7. Later [portability checks](portability.md) cover the exact
 released wheel on macOS/Python 3.13.14 and 3.14.7, plus Linux/aarch64/Python 3.11.15.
 
@@ -109,8 +111,10 @@ supporting evidence, not a comprehensive provenance or legal clearance guarantee
 1. Review the source pin, package file lists, license, and bounded source scan.
    Keep the README's alpha, synthetic-only, and illustrative-integration limits.
 2. A broader platform release needs hosted CI and installed-wheel onboarding.
-   The existing local alpha disclosed its tested platforms. Actions remain
-   disabled and hosted checks have not run; activation needs separate approval.
+   The existing alpha disclosed its tested platforms; the 2026-10-12
+   [hosted receipt](portability.md#hosted-ci-on-2026-10-12) covers `3454cd5`.
+   Retain evidence for the chosen release commit and disclose optional paths
+   that remain untested. Release workflow activation remains separately scoped.
 3. Follow [release instructions](releases.md), which build review artifacts and
    do not auto-publish a package. Tags and package publication need a separately
    approved destination and reviewed artifact hashes.

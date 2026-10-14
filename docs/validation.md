@@ -16,7 +16,8 @@ at `cc8f213351b7fa68ed28f2acc482ca882fd1b505`, on macOS with Python 3.10.7, pass
 - The launch onboarding script ran the wheel's console entry point and three
   generated fixture tests from outside the checkout. Its editable-install
   negative control rejected before running trials. CI/release definitions now
-  include the same installed-wheel check; hosted execution remains unrun.
+  include the same installed-wheel check; hosted execution was unrun at this
+  historical baseline.
 - Correct release tag accepted; mismatched tag rejected.
 - Original-source inspection and a bounded secret/private-marker pattern scan
   found no matches. This is not a comprehensive secret detection guarantee.
@@ -72,7 +73,15 @@ source and published artifact hashes, add Linux/aarch64/Python 3.11.15 and newer
 macOS Python evidence. They cover the core and installed-wheel paths; the optional
 LangGraph examples were not repeated on those platforms.
 
-Unrun: hosted GitHub CI/release workflows, the full prepared runner matrix, real
+On 2026-10-12, [hosted CI run 38319407667](https://github.com/Daniel-Kim-Grata/crashfixture/actions/runs/38319407667)
+passed all six Ubuntu/macOS jobs at `3454cd5` for Python 3.10, 3.13, and 3.14.
+Each ran `scripts/verify.py`, installed its built wheel, and passed onboarding.
+The [hosted receipt](portability.md#hosted-ci-on-2026-10-12) separates this
+89-test core matrix from the frozen release's published-wheel checks and optional
+LangGraph evidence. It does not certify a later source commit.
+
+Unrun by these receipts: the hosted release-build workflow, optional LangGraph
+examples in the hosted matrix, real
 OpenHands or MCP integration, LangGraph async/pending-write or upstream-bug reproduction,
 and PyPI publication. The GitHub alpha assets are separate from PyPI.
 No external adoption is claimed.

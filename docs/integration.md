@@ -86,8 +86,11 @@ scope before any pitch. It is deferred beyond the finite launch MVP.
 
 ## Adoption sequence
 
-1. Run the hosted CI matrix before tagging an alpha. Actions are initially
-   disabled; local checks do not establish hosted compatibility.
+1. Retain hosted CI evidence for the chosen source before expanding the tested
+   platform scope. The initial alpha disclosed local validation; the
+   [2026-10-12 hosted matrix](portability.md#hosted-ci-on-2026-10-12) passed at
+   `3454cd5` for core verification and built-wheel onboarding. Optional
+   LangGraph paths remain outside that matrix.
 2. Make the two-minute broken/correct/no-op demo and pytest adapter the primary
    entry points. Ask early users for a synthetic reproducer of a real regression.
 3. After separately approved recipient and purpose, offer one focused fixture

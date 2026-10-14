@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "checked_date_utc": "2026-10-12",
+  "scope": "Historical local checks before CI-only activation; later hosted evidence is in hosted-ci-20261012.md",
   "repository": "https://github.com/Daniel-Kim-Grata/crashfixture",
   "source_commit": "90a93643ecb8ce2ef2421808a4a5fabcb310e41c",
   "source_tree": "afd1ce48170c2ba1f20dcad63a86f0f4bc68d4c9",

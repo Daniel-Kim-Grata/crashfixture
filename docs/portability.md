@@ -4,7 +4,8 @@ On 2026-10-12, the published `v0.1.0a1` source at
 `90a93643ecb8ce2ef2421808a4a5fabcb310e41c` and its downloaded release wheel were
 checked on additional local platforms. The tag and original five release assets
 remain unchanged. [The machine-readable summary](portability-20261012.json)
-records the exact source, hashes, interpreter versions, commands, and limits.
+records the exact source, hashes, interpreter versions, commands, and limits
+of those local checks before the hosted CI run described below.
 
 | Environment | Canonical source checks | Published-wheel onboarding |
 | --- | --- | --- |
@@ -54,13 +55,33 @@ The Linux check used the existing official Python image
 limited to two CPUs and 1 GiB RAM. It ran only public synthetic source and release
 artifacts, exposed no ports, and used no provider credentials.
 
+## Hosted CI on 2026-10-12
+
+After CI-only activation, [run 38319407667](https://github.com/Daniel-Kim-Grata/crashfixture/actions/runs/38319407667)
+completed successfully on 2026-10-12 at source commit
+`3454cd5c36aac928c84baa2756b1f29ced9dfb8a`, tree
+`bb8e1d5b5e1b7d4f13942402d9058f29e3576d7a`. The run and all six successful
+job step lists were rechecked on 2026-10-14 UTC. The
+[hosted receipt](hosted-ci-20261012.md) records their job IDs and scope.
+
+| Runner label | Python matrix values | Result in each job |
+| --- | --- | --- |
+| `ubuntu-latest` | 3.10, 3.13, 3.14 | Ruff check/format, 89 core tests, wheel/sdist build, built-wheel install, onboarding passed |
+| `macos-latest` | 3.10, 3.13, 3.14 | Ruff check/format, 89 core tests, wheel/sdist build, built-wheel install, onboarding passed |
+
+Each core suite had zero failures, errors, or skips. Each onboarding receipt
+matched all 14 demo controls and passed three installed-fixture tests. The
+four deliberate failures and six inconclusive demo controls are expected
+calibration evidence, not failing CI assertions. This run installed the wheel
+built from `3454cd5`; the downloaded release-wheel checks above remain a separate
+receipt at `90a9364`. Moving runner labels do not guarantee future environments.
+
 ## Remaining scope
 
-GitHub Actions remain disabled. The prepared CI definition now includes
-Linux/macOS with Python 3.10, 3.13, and 3.14, but none of those hosted jobs have
-run. These local checks do not establish Linux/x86_64 or the full runner matrix.
-Optional LangGraph/saver/charge examples were not repeated on the additional
-platforms. Their original macOS/Python 3.10.7 release evidence is separate.
+The hosted run covered the core and built-wheel onboarding. Optional
+LangGraph/saver/charge examples were not repeated in that matrix or on the
+additional local platforms. Their original macOS/Python 3.10.7 release evidence
+is separate. The hosted release-build workflow remains unrun by these receipts.
 
 There is no new version or PyPI publication, upstream bug reproduction, external
 adoption, or general exactly-once guarantee. All effects remain synthetic local

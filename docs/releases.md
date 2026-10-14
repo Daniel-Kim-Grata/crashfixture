@@ -2,18 +2,20 @@
 
 The release workflow builds and uploads artifacts for review; it does **not**
 publish to PyPI or create a GitHub release. Version tags, package publication,
-and hosted workflow execution require separate authorization. Actions are
-initially disabled. The original code and examples use the included MIT license
+and hosted release workflow execution require separate authorization. CI-only
+activation produced the successful [2026-10-12 core matrix](portability.md#hosted-ci-on-2026-10-12)
+at `3454cd5`; that receipt does not cover the release-build workflow or optional
+LangGraph examples. The original code and examples use the included MIT license
 and contributor attribution.
 
 1. Update the source version and changelog. Verify that the name is available at
    the chosen package/repository destination; the provisional name is not reserved.
 2. Run `python scripts/verify.py` and the two-minute demo. Review every regression
    and inconclusive control, not just the command's exit status.
-3. Obtain independent review. For a locally validated GitHub alpha, keep Actions
-   disabled and explicitly disclose the tested platform/interpreter and unrun
-   hosted matrix. A broader release needs hosted CI on Linux and macOS at the
-   chosen commit; tests on one local Mac do not establish that matrix.
+3. Obtain independent review and explicitly disclose the tested
+   platform/interpreter and any unrun paths. A broader release needs hosted CI
+   on Linux and macOS at the chosen commit; the existing receipt covers
+   `3454cd5`, and tests on one local Mac do not establish that matrix.
 4. After a version tag is separately authorized, create the reviewed tag. The
    `release-build` workflow checks tag/version agreement, runs the same checks,
    uses the commit timestamp as `SOURCE_DATE_EPOCH`, and uploads wheel/sdist plus

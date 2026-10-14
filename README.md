@@ -14,7 +14,10 @@ onboarding commands, and the remaining release gates.
 Start without a checkout using the [clean-wheel quickstart](docs/quickstart.md),
 then retain the [queued report job regression](examples/retry_job/README.md).
 The [portability receipt](docs/portability.md) records source and released-wheel
-checks on Linux/aarch64 and newer macOS Python versions; hosted CI remains unrun.
+checks on Linux/aarch64 and newer macOS Python versions, plus the successful
+2026-10-12 hosted Ubuntu/macOS matrix at `3454cd5` for Python 3.10, 3.13, and 3.14.
+Hosted checks cover the core and built-wheel onboarding; optional LangGraph
+examples were not run in that matrix.
 
 **Try the [clean consumer LangGraph walkthrough](docs/langgraph-walkthrough.md):**
 install the alpha wheel, kill a real graph after its effect commits, and inspect
