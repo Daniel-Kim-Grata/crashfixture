@@ -63,6 +63,11 @@ To check one trial with ordinary CI exit semantics:
 `run` exits `0` for pass, `1` for regression, `2` for inconclusive evidence. Each
 trial retains its ledger, scenario, attempts, signal receipt, and result under
 `crashfixture-artifacts/`. The CLI prints each verdict; JSON contains the evidence.
+When requesting both JSON and JUnit, use separate files. The CLI checks for
+shared destinations before starting any worker and again before writing JUnit.
+The second check catches aliases that become detectable only after JSON exists,
+such as case variants on a case-insensitive volume. These checks are not atomic:
+do not change the output paths or their aliases while the CLI is running.
 
 ## Use in pytest
 

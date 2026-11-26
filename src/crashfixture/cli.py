@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from pathlib import Path
 
 from .harness import Harness
 from .model import Boundary, Scenario, Status
@@ -13,6 +14,27 @@ from .workers import MODES
 
 def worker_command(mode: str) -> list[str]:
     return [sys.executable, "-m", "crashfixture.workers", mode]
+
+
+def _same_report_destination(first: str, second: str) -> bool:
+    left, right = Path(first).resolve(), Path(second).resolve()
+    if left == right:
+        return True
+    try:
+        return left.samefile(right)
+    except FileNotFoundError:
+        return False
+
+
+def _validate_report_destinations(
+    parser: argparse.ArgumentParser, json_path: str, junit_path: str
+) -> None:
+    try:
+        same_destination = _same_report_destination(json_path, junit_path)
+    except (OSError, RuntimeError) as exc:
+        parser.error(f"cannot compare report destinations: {exc}")
+    if same_destination:
+        parser.error("--json and --junit must use distinct output files")
 
 
 def demo_cases() -> list[tuple[str, Scenario, str, Status]]:
@@ -51,6 +73,8 @@ def main(argv: list[str] | None = None) -> int:
         command.add_argument("--json", dest="json_path")
         command.add_argument("--junit", dest="junit_path")
     args = parser.parse_args(argv)
+    if args.json_path and args.junit_path:
+        _validate_report_destinations(parser, args.json_path, args.junit_path)
     if args.action == "demo":
         cases = demo_cases()
     else:
@@ -77,6 +101,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.json_path:
         write_json(args.json_path, trials)
     if args.junit_path:
+        if args.json_path:
+            # Case-insensitive volumes can resolve two previously absent names
+            # to the same file only after the first report exists.
+            _validate_report_destinations(parser, args.json_path, args.junit_path)
         write_junit(args.junit_path, trials)
     if args.action == "demo":
         print(f"conformance: {'matched' if expected_match else 'MISMATCH'} ({len(trials)} trials)")
