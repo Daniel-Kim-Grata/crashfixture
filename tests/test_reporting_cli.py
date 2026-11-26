@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import xml.etree.ElementTree as ET
 
 import pytest
@@ -96,3 +97,83 @@ def test_cli_invalid_budget_is_usage_error(tmp_path):
     with pytest.raises(SystemExit) as exc:
         main(["run", "--boundary", "before_dispatch", "--max-attempts", "99"])
     assert exc.value.code == 2
+
+
+@pytest.mark.parametrize("action", ["run", "demo"])
+@pytest.mark.parametrize("alias", ["same", "relative", "symlink", "hardlink"])
+def test_cli_rejects_report_aliases_before_running(tmp_path, monkeypatch, capsys, action, alias):
+    monkeypatch.chdir(tmp_path)
+    report = tmp_path / "report"
+    other = tmp_path / "other"
+    if alias == "relative":
+        other = "report"
+    elif alias == "same":
+        other = report
+    elif alias == "symlink":
+        other.symlink_to(report)  # A dangling alias to a not-yet-written report.
+    else:
+        report.write_text("previous evidence", encoding="utf-8")
+        os.link(report, other)
+
+    args = [action, "--boundary", "after_effect"] if action == "run" else [action]
+    workdir = tmp_path / "runs"
+    with pytest.raises(SystemExit) as exc:
+        main([*args, "--workdir", str(workdir), "--json", str(report), "--junit", str(other)])
+    assert exc.value.code == 2
+    assert "--json and --junit must use distinct output files" in capsys.readouterr().err
+    assert not workdir.exists()
+    if alias == "hardlink":
+        assert report.read_text(encoding="utf-8") == "previous evidence"
+        assert other.read_text(encoding="utf-8") == "previous evidence"
+    else:
+        assert not report.exists()
+
+
+def test_cli_writes_both_report_formats_to_distinct_paths(tmp_path):
+    json_path, xml_path = tmp_path / "report.json", tmp_path / "report.xml"
+    assert (
+        main(
+            [
+                "run",
+                "--boundary",
+                "after_effect",
+                "--workdir",
+                str(tmp_path / "runs"),
+                "--json",
+                str(json_path),
+                "--junit",
+                str(xml_path),
+            ]
+        )
+        == 0
+    )
+    assert json.loads(json_path.read_text())["trials"][0]["status"] == "pass"
+    assert ET.parse(xml_path).getroot().attrib["errors"] == "0"
+
+
+def test_cli_case_only_destinations_respect_filesystem(tmp_path, capsys):
+    probe = tmp_path / "probe"
+    probe.touch()
+    case_insensitive = (tmp_path / "Probe").exists()
+    json_path, xml_path = tmp_path / "report", tmp_path / "Report"
+    args = [
+        "run",
+        "--boundary",
+        "after_effect",
+        "--workdir",
+        str(tmp_path / "runs"),
+        "--json",
+        str(json_path),
+        "--junit",
+        str(xml_path),
+    ]
+    if case_insensitive:
+        with pytest.raises(SystemExit) as exc:
+            main(args)
+        assert exc.value.code == 2
+        assert "must use distinct output files" in capsys.readouterr().err
+        assert json_path.samefile(xml_path)
+    else:
+        assert main(args) == 0
+        assert ET.parse(xml_path).getroot().attrib["errors"] == "0"
+    assert json.loads(json_path.read_text())["trials"][0]["status"] == "pass"
