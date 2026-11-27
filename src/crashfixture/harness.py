@@ -232,8 +232,7 @@ class Harness:
         directory: Path,
         fault_mode: str,
     ) -> tuple[Attempt, Fault | None]:
-        events_read, events_write = os.pipe()
-        acks_read, acks_write = os.pipe()
+        events_read = events_write = acks_read = acks_write = -1
         token = uuid.uuid4().hex
         proc = None
         fault = None
@@ -243,6 +242,8 @@ class Harness:
         witness_returncode = None
         try:
             try:
+                events_read, events_write = os.pipe()
+                acks_read, acks_write = os.pipe()
                 proc = subprocess.Popen(
                     list(command),
                     cwd=directory,

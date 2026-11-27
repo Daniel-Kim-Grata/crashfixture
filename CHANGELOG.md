@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Report an inconclusive launch when worker pipe setup fails and close any
+  descriptors opened before the failure.
 - Reject shared JSON and JUnit destinations instead of silently replacing JSON
   with XML. Check before launching the worker and again before writing JUnit.
 - Clean-wheel quickstart without a checkout and a queued report-job crash/retry

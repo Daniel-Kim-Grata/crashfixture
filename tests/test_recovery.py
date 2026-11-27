@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import errno
 import json
 import os
 import signal
 import subprocess
 import sys
 import time
+from contextlib import suppress
 from dataclasses import replace
 from pathlib import Path
 
@@ -226,6 +228,39 @@ def test_spawn_error_is_inconclusive(recovery):
     result = recovery.run(["/nonexistent/synthetic-worker"], Scenario(Boundary.BEFORE_DISPATCH))
     assert result.status is Status.INCONCLUSIVE
     assert result.attempts[0].error == "launch_error"
+
+
+@pytest.mark.parametrize("fail_on_second_pipe", [False, True])
+def test_pipe_setup_error_is_inconclusive(recovery, monkeypatch, fail_on_second_pipe):
+    real_pipe = os.pipe
+    opened = []
+
+    def pipe():
+        if not fail_on_second_pipe or opened:
+            raise OSError(errno.EMFILE, "too many open files")
+        descriptors = real_pipe()
+        opened.extend(descriptors)
+        return descriptors
+
+    monkeypatch.setattr(os, "pipe", pipe)
+    try:
+        result = recovery.run(worker_command("correct"), Scenario(Boundary.BEFORE_DISPATCH))
+        assert result.status is Status.INCONCLUSIVE
+        assert result.fault is None
+        (attempt,) = result.attempts
+        assert attempt.pid is None
+        assert attempt.error == "launch_error"
+        saved = json.loads((Path(result.artifact_dir) / "result.json").read_text())
+        assert saved["status"] == "inconclusive"
+        assert saved["attempts"][0]["error"] == "launch_error"
+        for descriptor in opened:
+            with pytest.raises(OSError) as exc:
+                os.fstat(descriptor)
+            assert exc.value.errno == errno.EBADF
+    finally:
+        for descriptor in opened:
+            with suppress(OSError):
+                os.close(descriptor)
 
 
 @pytest.mark.parametrize(
